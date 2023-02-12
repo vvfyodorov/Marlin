@@ -90,8 +90,8 @@ constexpr int nr_edge_points = level_corners_3_points ? 3 : 4;
 constexpr int available_points = nr_edge_points + ENABLED(BED_TRAMMING_INCLUDE_CENTER);
 constexpr int center_index = TERN(BED_TRAMMING_INCLUDE_CENTER, available_points - 1, -1);
 constexpr float inset_lfrb[4] = BED_TRAMMING_INSET_LFRB;
-constexpr xy_pos_t lf { (X_MIN_BED) + inset_lfrb[0], (Y_MIN_BED) + inset_lfrb[1] },
-                   rb { (X_MAX_BED) - inset_lfrb[2], (Y_MAX_BED) - inset_lfrb[3] };
+constexpr xy_pos_t lf { _MAX(X_MIN_BED,(X_MIN_BED) + inset_lfrb[0]), _MAX(Y_MIN_BED,(Y_MIN_BED) + inset_lfrb[1])},
+                   rb { _MIN(X_MAX_BED,(X_MAX_BED) - inset_lfrb[2]), _MIN(Y_MAX_BED,(Y_MAX_BED) - inset_lfrb[3])};
 
 static int8_t bed_corner;
 
